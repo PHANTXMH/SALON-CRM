@@ -2,6 +2,8 @@
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-image: url('https://carrickswan.com/wp-content/uploads/2016/04/site-background.jpg');
+    background-repeat:no-repeat;
 }
 
 /* Wrapping element */
@@ -18,11 +20,26 @@ textarea {
     max-width: 280px;
 }
 
+.jumbotron {
+    background-image: url('https://assets.teenvogue.com/photos/5c9b72ffb6a5256fe84d6a44/16:9/w_2000,h_1125,c_limit/tout-black-girl-church-editorial.jpg');
+    background-repeat: no-repeat;
+    background-position-x: bottom 200px;
+}
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 500px) {
     .jumbotron {
         margin-top: 20px;
+        position: relative;
+        /*width: 40em;*/
+        margin: auto;
+        /*height: 4em;*/
+        margin-top: -1em;
+        padding-top: 2em;
+        background-image: url('https://blackhairinformation.com/wp-content/uploads/2016/10/Salon.jpg');
+        /* background('('../folder1/Images/banner.png') */
+        background-size: 40em;
+        background-repeat: no-repeat;
     }
 
     .body-content {
