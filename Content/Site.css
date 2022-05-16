@@ -23,7 +23,11 @@ textarea {
 .jumbotron {
     background-image: url('https://assets.teenvogue.com/photos/5c9b72ffb6a5256fe84d6a44/16:9/w_2000,h_1125,c_limit/tout-black-girl-church-editorial.jpg');
     background-repeat: no-repeat;
-    background-position-x: bottom 200px;
+    background-position:40% 55%;
+}
+
+.tablehomepage nth-child(even) {
+    background-color: #f2f2f2;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -31,6 +35,7 @@ textarea {
     .jumbotron {
         margin-top: 20px;
         position: relative;
+        background-position:center 55%;
         /*width: 40em;*/
         margin: auto;
         /*height: 4em;*/

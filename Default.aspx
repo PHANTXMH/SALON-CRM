@@ -3,21 +3,21 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br /><br />
     <div ID="banner" class="jumbotron">
-        <h1 style="color:darkgoldenrod;">Beauty Matters</h1>
-        <p class="lead" style="color:darkgoldenrod;">Welcome to Beauty Matters, where your beauty matters to us!</p>
+        <h1>Beauty Matters</h1>
+        <p class="lead">Welcome to Beauty Matters, where your beauty matters to us!</p>
         <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Book Appointment &raquo;</a></p>
     </div>
 
     <div id="Opening Hours" class="row">
         <div class="col-md-4">
             <h2>Opening Hours</h2>
-            <asp:Table ID="Table_Opening_Hours" runat="server" CellPadding="10" GridLines="Both" CssClass="table table-bordered">                
+            <asp:Table ID="Table_Opening_Hours" runat="server" CellPadding="10" GridLines="Both" CssClass="table table-bordered table-striped">                
                 <asp:TableRow>
                     <asp:TableCell>
                         <asp:Label ID="Label_sunday" runat="server" Text="Sunday"></asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:Label ID="Label_sunday_time" runat="server" Text="CLOSED"></asp:Label>
+                        <asp:Label ID="Label_sunday_time" runat="server" Text="11:00 am to 5:00 pm"></asp:Label>
                     </asp:TableCell>
                 </asp:TableRow>
                 <asp:TableRow>
@@ -73,7 +73,7 @@
 
         <div id="Services" class="col-md-4">
             <h2>Services</h2>
-            <asp:Table ID="Table1" runat="server" CellPadding="10" GridLines="Both" CssClass="table table-bordered">
+            <asp:Table ID="Table_services" runat="server" CellPadding="10" GridLines="Both" CssClass="table table-bordered table-striped">
                 <asp:TableRow>
                     <asp:TableCell>
                         Top Services
@@ -140,7 +140,7 @@
             <h2>Gallery</h2>
             <asp:Image ID="Image_homepage" runat="server" />
             <br /><br />
-            <asp:Button ID="Button_homepage_gallery_previous" class="btn btn-primary" runat="server" Text=" < " />
+            <asp:Button ID="Button_homepage_gallery_previous" class="btn btn-primary" runat="server" Text=" < " OnClick="Button_homepage_gallery_previous_Click" />
             <asp:Button ID="Button_homepage_gallery_next" class="btn btn-primary" runat="server" Text=" > " OnClick="Button_homepage_gallery_next_Click" />
         </div>
     </div>
