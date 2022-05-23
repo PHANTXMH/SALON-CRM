@@ -6,6 +6,11 @@ body {
     background-repeat:no-repeat;
 }
 
+.lead{
+    color: dodgerblue;
+    font-family:'Brush Script MT';
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -21,9 +26,12 @@ textarea {
 }
 
 .jumbotron {
-    background-image: url('https://assets.teenvogue.com/photos/5c9b72ffb6a5256fe84d6a44/16:9/w_2000,h_1125,c_limit/tout-black-girl-church-editorial.jpg');
+    background-image: url('https://t3.ftcdn.net/jpg/03/01/00/58/360_F_301005811_26lHKQR8JDAS1ikrNczzLbTKqgk50Rds.jpg');
+    /* background-image: url('https://assets.teenvogue.com/photos/5c9b72ffb6a5256fe84d6a44/16:9/w_2000,h_1125,c_limit/tout-black-girl-church-editorial.jpg');*/
     background-repeat: no-repeat;
-    background-position:40% 55%;
+    
+    /*transform: scaleX(-1);*/
+    /*background-position: 80% 45%;*/
 }
 
 .tablehomepage nth-child(even) {

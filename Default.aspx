@@ -1,11 +1,11 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Salon_CRM._Default" %>
+﻿<%@ Page Title="Beauty Palace" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Salon_CRM._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br /><br />
     <div ID="banner" class="jumbotron">
-        <h1>Beauty Matters</h1>
-        <p class="lead">Welcome to Beauty Matters, where your beauty matters to us!</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Book Appointment &raquo;</a></p>
+        <h1 style="font-family:'Brush Script MT'; color: dodgerblue;">Beauty Palace</h1>
+        <p class="lead">Welcome to the Beauty Palace, join the family and book your appointment today!</p>
+        <p><a href="Appointments.aspx" class="btn btn-primary btn-lg">Book Appointment &raquo;</a></p>
     </div>
 
     <div id="Opening Hours" class="row">

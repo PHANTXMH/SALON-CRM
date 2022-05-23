@@ -3,9 +3,9 @@
     <center>
         <br /><br />
         <asp:Label ID="Label1" runat="server" CssClass="label label-primary" Text="Appointments"></asp:Label>
-        <br /><br />
-        <asp:Label ID="Label3" CssClass="h1" runat="server" Text="Jessica"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Label ID="Label4" CssClass="h1" runat="server" Text="Skye"></asp:Label>
+        <br /><br />        
+        <asp:Label ID="Label_firstname_appointment" CssClass="h1" runat="server" Text="Jessica"></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Label_lastname_appointment" CssClass="h1" runat="server" Text="Skye"></asp:Label>
         <br /><br />
         <asp:Label ID="Label2" runat="server" CssClass="label label-info" Text="Pending Appointments"></asp:Label>
         <br />
