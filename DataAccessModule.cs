@@ -10,21 +10,11 @@ namespace Salon_CRM
 {
     public class DataAccessModule
     {
-        List<int> selectedServices = new List<int>();
+        
         public string connectionString()
         {
             return ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString;
-        }
-
-        public void addAppointment(int appointment)
-        {
-            selectedServices.Add(appointment);
-        }
-
-        public void removeAppointment(int appointment)
-        {
-            selectedServices.Remove(appointment);
-        }
+        }       
 
         public DataTable getAllServices()
         {
@@ -33,6 +23,38 @@ namespace Salon_CRM
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();            
             dbConn.Open();
             dataAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM services;", dbConn);
+            dataAdapter.Fill(dataTable);
+
+            //Garbage collection            
+            dataAdapter.Dispose();
+
+            return dataTable;
+        }
+
+        public DataTable getPendingAppointments(int clientId)
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            DataTable dataTable = new DataTable("appointments");
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM appointment;", dbConn);
+            cmd.Parameters.AddWithValue("@clientId", clientId);
+            dataAdapter.SelectCommand = cmd;
+            dataAdapter.Fill(dataTable);
+
+            //Garbage collection            
+            dataAdapter.Dispose();
+
+            return dataTable;
+        }
+
+        public DataTable getBookingServices(List<int> bookingID)
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            DataTable dataTable = new DataTable("services");
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+            dbConn.Open();
+            dataAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM services WHERE ", dbConn);
             dataAdapter.Fill(dataTable);
 
             //Garbage collection            

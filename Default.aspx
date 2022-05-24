@@ -5,7 +5,7 @@
     <div ID="banner" class="jumbotron">
         <h1 style="font-family:'Brush Script MT'; color: dodgerblue;">Beauty Palace</h1>
         <p class="lead">Welcome to the Beauty Palace, join the family and book your appointment today!</p>
-        <p><a href="Appointments.aspx" class="btn btn-primary btn-lg">Book Appointment &raquo;</a></p>
+        <p><a href="Services.aspx" class="btn btn-primary btn-lg">Book Appointment &raquo;</a></p>
     </div>
 
     <div id="Opening Hours" class="row">

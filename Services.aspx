@@ -3,8 +3,7 @@
     <br /><br />
     <center>
         <asp:Label ID="Label1" CssClass=" label label-primary" runat="server" Text="Services"></asp:Label>
-        <br /><br />
-        
+        <br /><br />        
         <asp:GridView ID="GridView_services" runat="server"  AutoGenerateColumns="false"  CssClass="table table-bordered table-striped col-auto justify-content-center">
             <Columns>             
                 <asp:BoundField DataField="id"/>

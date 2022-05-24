@@ -8,8 +8,7 @@ using System.Web.UI.WebControls;
 namespace Salon_CRM
 {
     public partial class Services : System.Web.UI.Page
-    {                
-        
+    {        
         DataAccessModule dbAccess = new DataAccessModule();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,9 +32,8 @@ namespace Salon_CRM
                     Session["appointmentCount"] = int.Parse(Session["appointmentCount"].ToString()) + 1;                    
                     btn.Text = "Deselect";
                     btn.BackColor = System.Drawing.Color.Red;
-
-                    dbAccess.addAppointment(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
-                    //dbAccess.selectedServices.Add(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
+                    
+                    Global.selectedServices.Add(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
                 }
                 else
                 {
@@ -50,9 +48,9 @@ namespace Salon_CRM
                 if (int.Parse(Session["appointmentCount"].ToString()) > 0)
                 {
                     Session["appointmentCount"] = int.Parse(Session["appointmentCount"].ToString()) - 1;
-                }                
+                }
 
-                //dbAccess.selectedServices.Remove(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
+                Global.selectedServices.Remove(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
 
             }          
         }
