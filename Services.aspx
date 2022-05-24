@@ -17,10 +17,7 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
-        <br /><br />
-        <asp:Label ID="Label2" runat="server" CssClass="label label-info" Text="Selected Services: "></asp:Label><br />
-        <asp:TextBox ID="TextBox_services" CssClass="form-group" runat="server" Width="1414px"></asp:TextBox>
-        <br /><br />
-        <asp:Button ID="Button_services_bookappointment" CssClass="btn btn-primary" runat="server" Text="Book Appointment >>" />
+        <br /><br />        
+        <asp:Button ID="Button_services_bookappointment" CssClass="btn btn-primary" runat="server" Text="Book Appointment >>" OnClick="Button_services_bookappointment_Click" />
     </center>
 </asp:Content>

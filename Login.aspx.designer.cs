@@ -60,6 +60,15 @@ namespace Salon_CRM
         protected global::System.Web.UI.WebControls.TextBox TextBox_login_password;
 
         /// <summary>
+        /// Label_login_info control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label_login_info;
+
+        /// <summary>
         /// Button_login_signup control.
         /// </summary>
         /// <remarks>

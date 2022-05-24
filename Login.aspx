@@ -11,8 +11,10 @@
             <asp:Label ID="Label3" runat="server" Text="Password: "></asp:Label><br />
             <asp:TextBox ID="TextBox_login_password" runat="server" TextMode="Password"></asp:TextBox>
             <br /><br />
-            <asp:Button ID="Button_login_signup" runat="server" CssClass="btn btn-primary" Text="Sign In" />
+            <asp:Label ID="Label_login_info" Visible="false" runat="server" Text="Label"></asp:Label>
             <br />
+            <asp:Button ID="Button_login_signup" runat="server" CssClass="btn btn-primary" Text="Sign In" OnClick="Button_login_signup_Click" />
+            <br /><br />
             <a runat="server" href= "~/CreateAccount">I do not have an account.</a>
         </center>
     </div>       
