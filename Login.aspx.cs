@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using Npgsql;
 
 namespace Salon_CRM
 {
@@ -18,18 +19,27 @@ namespace Salon_CRM
 
         protected void Button_login_signup_Click(object sender, EventArgs e)
         {
-            DataTable dt = dbAccess.getUser(TextBox_login_email.Text, TextBox_login_password.Text);
+            NpgsqlConnection dbConn = new NpgsqlConnection(dbAccess.connectionString());
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM clients WHERE email = @username AND password = @password;", dbConn);
+            cmd.Parameters.AddWithValue("@username", TextBox_login_email.Text.Trim());
+            cmd.Parameters.AddWithValue("@password", TextBox_login_password.Text.Trim());
+            NpgsqlDataReader dataReader = cmd.ExecuteReader();           
 
-            if(dt == null)
+            if (dataReader.HasRows)
             {
-                Label_login_info.BackColor = System.Drawing.Color.Red;
-                Label_login_info.Text = "Unable to find user, Please try again.";
-                Label_login_info.Visible = true;
+                dataReader.Read();
+                Global.user = new User(int.Parse(dataReader.GetValue(0).ToString()), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString());
+                Response.Redirect("Default.aspx");
             }
             else
             {
-
+                Label_login_info.ForeColor = System.Drawing.Color.Red;
+                Label_login_info.Text = "Unable to find user, Please try again.";
+                Label_login_info.Visible = true;                
             }
+
+            dbConn.Close();
         }
     }
 }

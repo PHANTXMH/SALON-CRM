@@ -40,24 +40,6 @@ namespace Salon_CRM
 
             return dataTable;
         }
-
-        public DataTable getUser(string username, string password)
-        {
-            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
-            DataTable dataTable = new DataTable("clients");
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
-            dbConn.Open();
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM clients WHERE email = @username AND password = @password;", dbConn);
-            cmd.Parameters.AddWithValue("@username", username);
-            cmd.Parameters.AddWithValue("@password", password);
-            dataAdapter.SelectCommand = cmd;
-
-            dataAdapter.Fill(dataTable);
-
-            //Garbage collection            
-            dataAdapter.Dispose();
-
-            return dataTable;
-        }
+       
     }
 }
