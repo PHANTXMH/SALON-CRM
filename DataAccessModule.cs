@@ -86,11 +86,62 @@ namespace Salon_CRM
 
             return dataTable;
         }  
+
+        public DataTable getDashboardAppointmentForToday()
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            DataTable dataTable = new DataTable();
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT a.id, CONCAT(c.firstname,' ',c.lastname) AS clientname, a.appointmenttime FROM" +
+                " clients AS c, appointment AS a WHERE a.appointmentdate = @date AND c.id = a.clientid;", dbConn);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+            dataAdapter.SelectCommand = cmd;
+            dataAdapter.Fill(dataTable);
+            //Garbage collection            
+            dataAdapter.Dispose();
+
+            return dataTable;
+        }
+
+        public DataTable getAllDashboardAppointment()
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            DataTable dataTable = new DataTable();
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT a.id, CONCAT(c.firstname,' ',c.lastname) AS clientname, a.appointmenttime FROM" +
+                " clients AS c, appointment AS a WHERE c.id = a.clientid;", dbConn);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+            dataAdapter.SelectCommand = cmd;
+            dataAdapter.Fill(dataTable);
+            //Garbage collection            
+            dataAdapter.Dispose();
+
+            return dataTable;
+        }
         
+        public DataTable getAllServicesFromAppointment(int appid)
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            DataTable dataTable = new DataTable();
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT s.servicename FROM services as s, appointment_services as b where s.id = b.serviceid and b.appointmentid = @appid;", dbConn);
+            cmd.Parameters.AddWithValue("@appid", appid);
+            dataAdapter.SelectCommand = cmd;
+            dataAdapter.Fill(dataTable);
+
+            //Garbage collection            
+            dataAdapter.Dispose();
+
+            return dataTable;
+        }
+        
+
         public void setClientAppointment(int clientId, string appointmentdate, string appointmenttime)
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());            
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
             NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO appointment (appointmentdate,appointmenttime,clientid) VALUES (@appdate,@apptime,@clientid);", dbConn);
             cmd.Parameters.AddWithValue("@appdate", DateTime.Parse(appointmentdate).Date);
@@ -128,6 +179,22 @@ namespace Salon_CRM
             }
 
             dbConn.Close();
+        }
+
+        public void addNewUser(string firstname, string lastname, string email, string password)
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());            
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO clients (firstname, lastname, email, password) VALUES (@fname,@lname,@email, @password);", dbConn);
+            cmd.Parameters.AddWithValue("@fname", firstname);
+            cmd.Parameters.AddWithValue("@lname", lastname);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@password", password);
+            cmd.ExecuteNonQuery();
+            cmd = new NpgsqlCommand("SELECT id FROM clients ORDER BY id DESC LIMIT 1;", dbConn);
+            NpgsqlDataReader dataReader = cmd.ExecuteReader();
+            dataReader.Read();
+            Global.user = new User(int.Parse(dataReader.GetValue(0).ToString()), firstname, lastname, email);            
         }
        
     }

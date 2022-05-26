@@ -18,6 +18,8 @@
             <asp:Label ID="Label5" runat="server" Text="Password"></asp:Label><br />
             <asp:TextBox ID="TextBox_createaccount_password" runat="server" TextMode="Password"></asp:TextBox>
             <br /><br />
+            <asp:Label ID="Label_createaccount_info" runat="server" Visible="false" ForeColor="Red" Text="Label"></asp:Label>
+            <br />
             <asp:Button ID="Button_createaccount_signup" runat="server" Text="Sign Up" class="btn btn-success" OnClick="Button_signup_Click" />
         </center>
     </div>    
