@@ -53,14 +53,81 @@ namespace Salon_CRM
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
             DataTable dataTable = new DataTable("services");
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
-            dbConn.Open();
-            dataAdapter.SelectCommand = new NpgsqlCommand("SELECT * FROM services WHERE ", dbConn);
-            dataAdapter.Fill(dataTable);
+            dbConn.Open();            
+
+            if(Global.selectedServices.Count == 1)  //if there is one service selected
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM services WHERE id= @serviceId;", dbConn);
+                cmd.Parameters.AddWithValue("@serviceId", bookingID[0]);
+                dataAdapter.SelectCommand = cmd;
+                dataAdapter.Fill(dataTable);
+            }
+            else if(Global.selectedServices.Count == 2) //if there are two services selected
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM services WHERE id = @serviceId1 OR id = @serviceId2;", dbConn);
+                cmd.Parameters.AddWithValue("@serviceId1", bookingID[0]);
+                cmd.Parameters.AddWithValue("@serviceId2", bookingID[1]);
+                dataAdapter.SelectCommand = cmd;
+                dataAdapter.Fill(dataTable);
+            }
+            else if(Global.selectedServices.Count == 3)     // if there are three services selected
+            {
+                NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM services WHERE id = @serviceId1 OR id = @serviceId2 OR id = @serviceId3;", dbConn);
+                cmd.Parameters.AddWithValue("@serviceId1", bookingID[0]);
+                cmd.Parameters.AddWithValue("@serviceId2", bookingID[1]);
+                cmd.Parameters.AddWithValue("@serviceId3", bookingID[2]);
+                dataAdapter.SelectCommand = cmd;
+                dataAdapter.Fill(dataTable);
+            }           
 
             //Garbage collection            
             dataAdapter.Dispose();
 
             return dataTable;
+        }  
+        
+        public void setClientAppointment(int clientId, string appointmentdate, string appointmenttime)
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());            
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO appointment (appointmentdate,appointmenttime,clientid) VALUES (@appdate,@apptime,@clientid)", dbConn);
+            cmd.Parameters.AddWithValue("@appdate", DateTime.Parse(appointmentdate).Date);
+            cmd.Parameters.AddWithValue("@apptime", DateTime.Parse(appointmenttime));
+            cmd.Parameters.AddWithValue("@clientid", clientId);
+            cmd.ExecuteNonQuery();            
+            cmd = new NpgsqlCommand("SELECT id FROM appointment ORDER BY id DESC LIMIT 1",dbConn);
+            NpgsqlDataReader dataReader = cmd.ExecuteReader();
+            dataReader.Read();
+            int currentAppointment = int.Parse(dataReader.GetValue(0).ToString());
+
+            if(Global.selectedServices.Count == 1)
+            {
+                cmd.Cancel();
+                cmd = new NpgsqlCommand("INSERT INTO appointment_services (appointmentid,serviceid) VALUES (@appid, @serviceid);",dbConn);
+                cmd.Parameters.AddWithValue("@appid", currentAppointment);
+                cmd.Parameters.AddWithValue("@serviceid", Global.selectedServices[0]);
+                cmd.ExecuteNonQuery();
+            }else if(Global.selectedServices.Count == 2)
+            {
+                cmd.Cancel();
+                cmd = new NpgsqlCommand("INSERT INTO appointment_services (appointmentid,serviceid) VALUES (@appid, @serviceid), (@appid, @serviceid2);",dbConn);
+                cmd.Parameters.AddWithValue("@appid", currentAppointment);
+                cmd.Parameters.AddWithValue("@serviceid", Global.selectedServices[0]);                
+                cmd.Parameters.AddWithValue("@serviceid2", Global.selectedServices[1]);
+                cmd.ExecuteNonQuery();
+            }else if(Global.selectedServices.Count == 3)
+            {
+                cmd.Cancel();
+                cmd = new NpgsqlCommand("INSERT INTO appointment_services (appointmentid,serviceid) VALUES (@appid, @serviceid), (@appid, @serviceid2),(@appid, @serviceid3;",dbConn);
+                cmd.Parameters.AddWithValue("@appid", currentAppointment);
+                cmd.Parameters.AddWithValue("@serviceid", Global.selectedServices[0]);
+                cmd.Parameters.AddWithValue("@serviceid2", Global.selectedServices[1]);
+                cmd.Parameters.AddWithValue("@serviceid3", Global.selectedServices[2]);
+                cmd.ExecuteNonQuery();
+            }
+
+            dbConn.Close();
         }
        
     }

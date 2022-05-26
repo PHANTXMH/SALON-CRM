@@ -11,6 +11,10 @@ body {
     font-family:'Brush Script MT';
 }
 
+#Calendar_appointment {
+    background-color: coral;
+}
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {

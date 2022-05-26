@@ -11,7 +11,17 @@ namespace Salon_CRM
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Global.user == null)
+            {
+                Label_signin.Text = "Sign In";
+                Label_navbar_accountname.Visible = false;
+            }
+            else
+            {
+                Label_navbar_accountname.Text = "Hi, " + Global.user.Fname+"!";
+                Label_signin.Text = "Log Out";
+                Label_navbar_accountname.Visible = true;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Appointments.aspx.cs" Inherits="Salon_CRM.Appointments" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <br /><br />
+    <asp:Button ID="Button1" runat="server" CssClass="btn btn-primary" Text="Make new Appointment " OnClick="Button1_Click" />
     <center>
         <br /><br />
         <asp:Label ID="Label1" runat="server" CssClass="label label-primary" Text="Appointments"></asp:Label>
@@ -14,7 +16,7 @@
                 <asp:BoundField ItemStyle-CssClass="labelstuff" DataField="appointmentdate" HeaderText="DATE" HeaderStyle-CssClass="labelstuff" />     
                 <asp:BoundField ItemStyle-CssClass="labelstuff" DataField="appointmenttime" HeaderText="TIME" HeaderStyle-CssClass="labelstuff" />                
             </Columns>
-        </asp:GridView>        
+        </asp:GridView>  
         <br /><br />
         <asp:Label ID="Label3" runat="server" CssClass="label label-info" Text="Bookings"></asp:Label>
         <br /><br />        
@@ -31,5 +33,15 @@
             </Columns>
         </asp:GridView>
     </center>      
-        
+    <asp:Label ID="Label4" runat="server" CssClass="label label-info" Text="Total: "></asp:Label>  
+    <asp:TextBox ID="TextBox_appointment_total" Enabled="false" CssClass="form-control" runat="server"></asp:TextBox>
+    <br /><br />
+     <asp:Label ID="Label5" runat="server" CssClass="label label-info" Text="Select Date and Time"></asp:Label>
+    <center>       
+        <asp:Calendar ID="Calendar_appointment" runat="server"></asp:Calendar><br />
+        <asp:DropDownList ID="DropDownList_appointment_time_selection" CssClass="form-control" runat="server"></asp:DropDownList>
+        <br /><br />
+        <asp:Label ID="Label_confirm_button_info" runat="server" Visible="false" ForeColor="Red" Text="Label"></asp:Label><br />
+        <asp:Button ID="Button_appointment_confirm" runat="server" CssClass="btn btn-success" Text="Confirm Appointment" OnClick="Button_appointment_confirm_Click" />
+    </center>
 </asp:Content>

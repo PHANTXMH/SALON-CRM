@@ -14,7 +14,10 @@ namespace Salon_CRM
         DataAccessModule dbAccess = new DataAccessModule();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Global.user != null)
+            {
+                Global.user = null;
+            }
         }
 
         protected void Button_login_signup_Click(object sender, EventArgs e)

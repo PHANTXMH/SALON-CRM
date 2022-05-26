@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cute Cut</title>
+    <title>Beauty Palace</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -56,8 +56,13 @@
                         <li><a runat="server" href="Appointments">Appointments</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a runat="server">
+                            <asp:Label ID="Label_navbar_accountname" Visible="false" runat="server" Text="Label"></asp:Label></a>
+                        </li>
                         <li><a runat="server" href="~/Login">
-                            <asp:Label ID="Label_signin" runat="server" Text="Sign In"></asp:Label></a></li>
+                            <asp:Label ID="Label_signin" runat="server" Text="Sign In"></asp:Label></a>
+
+                        </li>
                     </ul>
                 </div>
             </div>
