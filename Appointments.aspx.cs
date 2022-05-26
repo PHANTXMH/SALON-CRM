@@ -44,11 +44,11 @@ namespace Salon_CRM
 
             if (GridView_appointment_new_bookings.Rows.Count < 1)
             {
-                Button_appointment_confirm.Enabled = false;
+                Button_appointment_confirm.Enabled = false;                
             }
             else
             {
-                Button_appointment_confirm.Enabled = true;
+                Button_appointment_confirm.Enabled = true;                
             }
            
         }
@@ -90,28 +90,46 @@ namespace Salon_CRM
 
         protected void Button_appointment_confirm_Click(object sender, EventArgs e)
         {
-            if (Calendar_appointment.SelectedDate.CompareTo(DateTime.Now) < 0)
+            if (Calendar_appointment.SelectedDate == DateTime.MinValue)
             {
-                Label_confirm_button_info.Text = "The date selected has already passed.";
-                Label_confirm_button_info.Visible = true;
-            }
-            else if(Calendar_appointment.SelectedDate.DayOfWeek == DayOfWeek.Saturday)
-            {
-                Label_confirm_button_info.Text = "The business is closed on Saturday.";
+                Label_confirm_button_info.Text = "Please select a date for the appointment.";
+                Label_confirm_button_info.ForeColor = System.Drawing.Color.Red;
                 Label_confirm_button_info.Visible = true;
             }
             else
+            if (Calendar_appointment.SelectedDate.CompareTo(DateTime.Now) < 0)
             {
-                Label_confirm_button_info.Visible = false;
+                Label_confirm_button_info.Text = "The date selected has already passed.";
+                Label_confirm_button_info.ForeColor = System.Drawing.Color.Red;
+                Label_confirm_button_info.Visible = true;
+            }
+            else
+            if(Calendar_appointment.SelectedDate.DayOfWeek == DayOfWeek.Saturday)
+            {
+                Label_confirm_button_info.Text = "The business is closed on Saturday.";
+                Label_confirm_button_info.ForeColor = System.Drawing.Color.Red;
+                Label_confirm_button_info.Visible = true;
+            }
+            else             
+            {                
+                //RUN DATABASE COMMAND TO ADD APPOINTMENT FOR CURRENT USER
+                dbAccess.setClientAppointment(Global.user.Id, Calendar_appointment.SelectedDate.ToShortDateString(), DropDownList_appointment_time_selection.SelectedValue);
+                Label_confirm_button_info.Text = "Your appointment has been created.";
+                Label_confirm_button_info.ForeColor = System.Drawing.Color.Green;
+                Label_confirm_button_info.Visible = true;
+                Button_appointment_confirm.Enabled = false;
+
+                GridView_pending_appointments.DataSource = dbAccess.getPendingAppointments(Global.user.Id);
+                GridView_pending_appointments.DataBind();
+
+                Global.selectedServices = new List<int>();  //clear list after processing
+                TextBox_appointment_total.Text = "";
+
+                GridView_appointment_new_bookings.DataSource = dbAccess.getBookingServices(Global.selectedServices);
+                GridView_appointment_new_bookings.DataBind();
             }
 
-            //RUN DATABASE COMMAND TO ADD APPOINTMENT FOR CURRENT USER
-            dbAccess.setClientAppointment(Global.user.Id, Calendar_appointment.SelectedDate.ToShortDateString(), DropDownList_appointment_time_selection.SelectedValue);
-
-            GridView_pending_appointments.DataSource = dbAccess.getPendingAppointments(Global.user.Id);
-            GridView_pending_appointments.DataBind();
-
-            Global.selectedServices = new List<int>();  //clear list after processing
+            
         }
     }
 }

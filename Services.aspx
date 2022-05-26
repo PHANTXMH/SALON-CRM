@@ -17,6 +17,6 @@
             </Columns>
         </asp:GridView>
         <br /><br />        
-        <asp:Button ID="Button_services_bookappointment" CssClass="btn btn-primary" runat="server" Text="Book Appointment >>" OnClick="Button_services_bookappointment_Click" />
+        <asp:Button ID="Button_services_bookappointment" CssClass="btn btn-primary" runat="server" Enabled="false" Text="Book Appointment >>" OnClick="Button_services_bookappointment_Click" />
     </center>
 </asp:Content>

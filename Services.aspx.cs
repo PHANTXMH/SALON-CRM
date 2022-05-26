@@ -21,7 +21,7 @@ namespace Salon_CRM
         }
 
         protected void Button_services_select_Click(object sender, EventArgs e)
-        {            
+        {
             Button btn = sender as Button;
             int rw = ((GridViewRow)(btn).NamingContainer).RowIndex; //Gets the row id for the selected service
 
@@ -52,7 +52,17 @@ namespace Salon_CRM
 
                 Global.selectedServices.Remove(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
 
-            }          
+            }
+
+            int x = Global.selectedServices.Count;
+            if (Global.selectedServices.Count == 0)
+            {
+                Button_services_bookappointment.Enabled = false;
+            }
+            else
+            {
+                Button_services_bookappointment.Enabled = true;
+            }
         }
 
         protected void Button_services_bookappointment_Click(object sender, EventArgs e)
