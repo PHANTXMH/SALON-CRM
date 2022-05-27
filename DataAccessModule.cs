@@ -94,8 +94,8 @@ namespace Salon_CRM
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
             NpgsqlCommand cmd = new NpgsqlCommand("SELECT a.id, CONCAT(c.firstname,' ',c.lastname) AS clientname, a.appointmenttime FROM" +
-                " clients AS c, appointment AS a WHERE a.appointmentdate = @date AND c.id = a.clientid;", dbConn);
-            cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                " clients AS c, appointment AS a WHERE a.appointmentdate = @date AND c.id = a.clientid AND a.completed = 0;", dbConn);
+            cmd.Parameters.AddWithValue("@date", DateTime.Today);
             dataAdapter.SelectCommand = cmd;
             dataAdapter.Fill(dataTable);
             //Garbage collection            
@@ -110,8 +110,8 @@ namespace Salon_CRM
             DataTable dataTable = new DataTable();
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT a.id, CONCAT(c.firstname,' ',c.lastname) AS clientname, a.appointmenttime FROM" +
-                " clients AS c, appointment AS a WHERE c.id = a.clientid;", dbConn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT a.id, CONCAT(c.firstname,' ',c.lastname) AS clientname, a.appointmentdate, a.appointmenttime FROM" +
+                " clients AS c, appointment AS a WHERE c.id = a.clientid AND a.appointmentdate > @date ORDER BY a.appointmentdate;", dbConn);
             cmd.Parameters.AddWithValue("@date", DateTime.Now);
             dataAdapter.SelectCommand = cmd;
             dataAdapter.Fill(dataTable);
@@ -195,6 +195,15 @@ namespace Salon_CRM
             NpgsqlDataReader dataReader = cmd.ExecuteReader();
             dataReader.Read();
             Global.user = new User(int.Parse(dataReader.GetValue(0).ToString()), firstname, lastname, email);            
+        }
+
+        public void setAppointmentComplete(int appid)
+        {
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Open();
+            NpgsqlCommand cmd = new NpgsqlCommand("UPDATE appointment SET completed = 1 WHERE id = @appid;", dbConn);
+            cmd.Parameters.AddWithValue("@appid", appid);           
+            cmd.ExecuteNonQuery();
         }
        
     }

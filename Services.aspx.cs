@@ -33,7 +33,10 @@ namespace Salon_CRM
                     btn.Text = "Deselect";
                     btn.BackColor = System.Drawing.Color.Red;
                     
-                    Global.selectedServices.Add(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
+                    if(Global.selectedServices.Count < 3)
+                    {
+                        Global.selectedServices.Add(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
+                    }                    
                 }
                 else
                 {
@@ -54,7 +57,7 @@ namespace Salon_CRM
 
             }
 
-            int x = Global.selectedServices.Count;
+            int x = Global.selectedServices.Count;  //avoids user booking an appointment without selecting a service
             if (Global.selectedServices.Count == 0)
             {
                 Button_services_bookappointment.Enabled = false;

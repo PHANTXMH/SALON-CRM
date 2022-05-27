@@ -33,6 +33,15 @@ namespace Salon_CRM
         protected global::System.Web.UI.WebControls.GridView GridView_dashboard_today_appointment;
 
         /// <summary>
+        /// GridView_dashboard_appointment_services control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView GridView_dashboard_appointment_services;
+
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
