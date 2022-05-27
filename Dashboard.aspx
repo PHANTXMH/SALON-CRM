@@ -24,14 +24,16 @@
         <br /><br />
         <asp:Label ID="Label2" runat="server" CssClass="label label-info" Text="Upcoming Appointments"></asp:Label>
         <br /><br />
-         <asp:GridView ID="GridView_dashboard_all_appointment" runat="server"  AutoGenerateColumns="false"  CssClass="table table-bordered table-striped col-auto justify-content-center" >
+         <asp:GridView ID="GridView_dashboard_all_appointment" runat="server"  AutoGenerateColumns="false"  CssClass="table table-bordered table-striped col-auto justify-content-center">
             <Columns>    
                 <asp:BoundField DataField="id"/>
                 <asp:BoundField ItemStyle-CssClass="labelstuff" DataField="clientname" HeaderText="CLIENT'S NAME" HeaderStyle-CssClass="labelstuff" />
                 <asp:BoundField ItemStyle-CssClass="labelstuff" DataField="appointmenttime" HeaderText="APPOINTMENT TIME" HeaderStyle-CssClass="labelstuff" />                    
                 <asp:TemplateField  ItemStyle-HorizontalAlign="Center" HeaderText="SERVICES">
                     <ItemTemplate>
-                        <asp:DropDownList ID="DropDownList_dashboard_services_all" CssClass="formm-control" runat="server" ></asp:DropDownList>                                   
+                        <asp:DropDownList ID="DropDownList_dashboard_services_all" CssClass="form-control" runat="server" >
+                            <asp:ListItem Text="Cut and Curl" Value="0" />
+                        </asp:DropDownList>                                   
                     </ItemTemplate>
                 </asp:TemplateField>                
             </Columns>
