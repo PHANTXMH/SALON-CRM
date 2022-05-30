@@ -56,8 +56,7 @@ namespace Salon_CRM
                 Global.selectedServices.Remove(int.Parse(GridView_services.Rows[rw].Cells[0].Text));
 
             }
-
-            int x = Global.selectedServices.Count;  //avoids user booking an appointment without selecting a service
+            
             if (Global.selectedServices.Count == 0)
             {
                 Button_services_bookappointment.Enabled = false;

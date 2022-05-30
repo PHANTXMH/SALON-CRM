@@ -54,6 +54,8 @@
                         <li><a runat="server" href="~/Contact">Contact</a></li>    
                         <li><a runat="server" href="~/Services">Services</a></li>
                         <li><a runat="server" href="Appointments">Appointments</a></li>
+                        <li><a runat="server" href="Dashboard">
+                            <asp:Label ID="Label_navbar_dashboard" Visible="false" runat="server" Text="Dashboard"></asp:Label></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a runat="server">

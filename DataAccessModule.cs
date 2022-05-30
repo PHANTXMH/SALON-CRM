@@ -9,8 +9,8 @@ using System.Configuration;
 namespace Salon_CRM
 {
     public class DataAccessModule
-    {
-        
+    {        
+
         public string connectionString()
         {
             return ConfigurationManager.ConnectionStrings["dbCon"].ConnectionString;
@@ -18,7 +18,8 @@ namespace Salon_CRM
 
         public DataTable getAllServices()
         {
-            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());            
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();            
             DataTable dataTable = new DataTable("services"); 
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();            
             dbConn.Open();
@@ -35,11 +36,13 @@ namespace Salon_CRM
         public DataTable getPendingAppointments(int clientId)
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             DataTable dataTable = new DataTable("appointments");
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
-            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM appointment WHERE clientid = @clientId;", dbConn);
+            NpgsqlCommand cmd = new NpgsqlCommand("SELECT * FROM appointment WHERE clientid = @clientId AND appointmentdate > @date;", dbConn);
             cmd.Parameters.AddWithValue("@clientId", clientId);
+            cmd.Parameters.AddWithValue("@date", DateTime.Now);
             dataAdapter.SelectCommand = cmd;
             dataAdapter.Fill(dataTable);
 
@@ -52,6 +55,7 @@ namespace Salon_CRM
         public DataTable getBookingServices(List<int> bookingID)
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             DataTable dataTable = new DataTable("services");
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();            
@@ -90,6 +94,7 @@ namespace Salon_CRM
         public DataTable getDashboardAppointmentForToday()
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             DataTable dataTable = new DataTable();
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
@@ -107,6 +112,7 @@ namespace Salon_CRM
         public DataTable getAllDashboardAppointment()
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             DataTable dataTable = new DataTable();
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
@@ -124,6 +130,7 @@ namespace Salon_CRM
         public DataTable getAllServicesFromAppointment(int appid)
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             DataTable dataTable = new DataTable();
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter();
             dbConn.Open();
@@ -141,7 +148,8 @@ namespace Salon_CRM
 
         public void setClientAppointment(int clientId, string appointmentdate, string appointmenttime)
         {
-            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());            
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             dbConn.Open();
             NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO appointment (appointmentdate,appointmenttime,clientid) VALUES (@appdate,@apptime,@clientid);", dbConn);
             cmd.Parameters.AddWithValue("@appdate", DateTime.Parse(appointmentdate).Date);
@@ -183,7 +191,8 @@ namespace Salon_CRM
 
         public void addNewUser(string firstname, string lastname, string email, string password)
         {
-            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());            
+            NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             dbConn.Open();
             NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO clients (firstname, lastname, email, password) VALUES (@fname,@lname,@email, @password);", dbConn);
             cmd.Parameters.AddWithValue("@fname", firstname);
@@ -200,6 +209,7 @@ namespace Salon_CRM
         public void setAppointmentComplete(int appid)
         {
             NpgsqlConnection dbConn = new NpgsqlConnection(connectionString());
+            dbConn.Close();
             dbConn.Open();
             NpgsqlCommand cmd = new NpgsqlCommand("UPDATE appointment SET completed = 1 WHERE id = @appid;", dbConn);
             cmd.Parameters.AddWithValue("@appid", appid);           

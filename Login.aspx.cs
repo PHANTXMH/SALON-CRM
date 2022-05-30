@@ -31,9 +31,18 @@ namespace Salon_CRM
 
             if (dataReader.HasRows)
             {
-                dataReader.Read();
-                Global.user = new User(int.Parse(dataReader.GetValue(0).ToString()), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString());
-                Response.Redirect("Default.aspx");
+                dataReader.Read();                
+                Global.user = new User(int.Parse(dataReader.GetValue(0).ToString()), dataReader.GetValue(1).ToString(), dataReader.GetValue(2).ToString(), dataReader.GetValue(3).ToString(), int.Parse(dataReader.GetValue(5).ToString()));
+
+                if(Global.user.IsAdmin == 1)
+                {
+                    Response.Redirect("Dashboard.aspx");
+                }
+                else
+                {
+                    Response.Redirect("Default.aspx");
+                }
+                
             }
             else
             {

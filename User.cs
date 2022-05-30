@@ -11,6 +11,7 @@ namespace Salon_CRM
         private string fname;
         private string lname;
         private string username;
+        private int isAdmin;
 
         public User()
         {
@@ -18,6 +19,7 @@ namespace Salon_CRM
             this.fname = "<null>";
             this.lname = "<null>";
             this.username = "<null>";
+            this.isAdmin = 0;
         }
         public User(int id, string fname, string lname, string username)
         {
@@ -25,6 +27,15 @@ namespace Salon_CRM
             this.fname = fname;
             this.lname = lname;
             this.username = username;
+            this.isAdmin = 0;
+        }
+        public User(int id, string fname, string lname, string username, int isAdmin)
+        {
+            this.id = id;
+            this.fname = fname;
+            this.lname = lname;
+            this.username = username;
+            this.isAdmin = isAdmin;
         }
 
         public int Id
@@ -49,6 +60,12 @@ namespace Salon_CRM
         {
             get { return username; }
             set { this.username = value; }
+        }
+
+        public int IsAdmin
+        {
+            get { return isAdmin; }
+            set { this.isAdmin = value; }
         }
     }
 }

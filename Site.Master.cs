@@ -15,12 +15,24 @@ namespace Salon_CRM
             {
                 Label_signin.Text = "Sign In";
                 Label_navbar_accountname.Visible = false;
+                Label_navbar_dashboard.Visible = false;
             }
             else
             {
-                Label_navbar_accountname.Text = "Hi, " + Global.user.Fname+"!";
-                Label_signin.Text = "Log Out";
-                Label_navbar_accountname.Visible = true;
+                if(Global.user.IsAdmin == 1)
+                {
+                    Label_navbar_dashboard.Visible = true;
+                    Label_signin.Text = "Log Out";
+                    Label_navbar_accountname.Visible = true;
+                    Label_navbar_accountname.Text = "Hi admin";
+                }
+                else
+                {
+                    Label_navbar_accountname.Text = "Hi, " + Global.user.Fname+"!";
+                    Label_signin.Text = "Log Out";
+                    Label_navbar_accountname.Visible = true;
+                }
+                
             }
         }
     }
