@@ -3,8 +3,8 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <br /><br />
     <div ID="banner" class="jumbotron">
-        <h1 style="font-family:'Brush Script MT'; color: dodgerblue;">Beauty Palace</h1>
-        <p class="lead">Welcome to the Beauty Palace, join the family and book your appointment today!</p>
+        <h1 style="font-family:'Brush Script MT'; color: dodgerblue; text-shadow: 5px 5px 5px #000000;">Beauty Palace</h1>
+        <p style="color: limegreen; font-family: 'Copperplate Gothic'; text-shadow: 5px 5px 5px #000000;">Welcome to the Beauty Palace, join the family and book your appointment today!</p>
         <p><a href="Services.aspx" class="btn btn-primary btn-lg">Book Appointment &raquo;</a></p>
     </div>
 

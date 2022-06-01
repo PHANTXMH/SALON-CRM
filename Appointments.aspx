@@ -14,7 +14,7 @@
         <asp:GridView ID="GridView_pending_appointments" runat="server"  AutoGenerateColumns="false"  CssClass="table table-bordered table-striped col-auto justify-content-center">
             <Columns>               
                 <asp:BoundField ItemStyle-CssClass="labelstuff" DataFormatString = "{0:MMM dd, yyyy}" DataField="appointmentdate" HeaderText="DATE" HeaderStyle-CssClass="labelstuff" />     
-                <asp:BoundField ItemStyle-CssClass="labelstuff" DataField="appointmenttime" HeaderText="TIME" HeaderStyle-CssClass="labelstuff" />                
+                <asp:BoundField ItemStyle-CssClass="labelstuff" DataField="appointmenttime" DataFormatString = "{0:hh\:mm}" HeaderText="TIME" HeaderStyle-CssClass="labelstuff" />                
             </Columns>
         </asp:GridView>  
         <br /><br />

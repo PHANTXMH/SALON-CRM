@@ -6,9 +6,10 @@ body {
     background-repeat:no-repeat;
 }
 
-.lead{
+.lead {
     color: dodgerblue;
-    font-family:'Brush Script MT';
+    font-family: 'Brush Script MT';
+    text-shadow: 5px 5px 5px #000000;
 }
 
 #Calendar_appointment {
